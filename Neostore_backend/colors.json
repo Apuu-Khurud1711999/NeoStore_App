@@ -1,0 +1,26 @@
+[
+    {
+        "color_name":"red",
+        "color_code":"#d10d2f"
+    },
+    {
+        "color_name":"yellow",
+        "color_code":"#f3e260"
+    },
+    {
+        "color_name":"black",
+        "color_code":"#000000"
+    },
+    {
+        "color_name":"blue",
+        "color_code":"#1d2e68"
+    },
+    {
+        "color_name":"peach",
+        "color_code":"#fcc4a4"
+    },
+    {
+        "color_name":"white",
+        "color_code":"#ffffff"
+    }
+]
