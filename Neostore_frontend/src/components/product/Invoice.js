@@ -4,6 +4,7 @@ import { getsingleorder } from "../../config/MyService";
 import { useLocation } from "react-router";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import './invoice.css';
 
 function Invoice(props) {
   const [postdata, setPostdata] = useState([]);
@@ -59,14 +60,11 @@ function Invoice(props) {
             </Container>
             <br />
             <Container
-                style={{
-                    border: "1px solid black",
-                    width: "700px",
-                }}
+                className="invoicewidth"
                 ref={ref}
                 id="divToPrint"
             >
-                <div style={{ backgroundColor: "darkgrey" }}>
+                <div className="backgroundinvoice">
                     <Row>
 
                         <Col md={4}>
@@ -92,15 +90,12 @@ function Invoice(props) {
                         <Col md={6}>
                             <p>
                                 <span
-                                    style={{
-                                        fontWeight: "bold",
-                                        color: "gray",
-                                    }}
+                                    className="boldtext gray"
                                 >
                                     FROM
                                 </span>
                                 <br />
-                                <span style={{ fontWeight: "bold" }}>
+                                <span className="boldtext">
                                     Neo<span className="text-danger">STORE</span>
                                 </span>
                                 <br />
@@ -111,10 +106,7 @@ function Invoice(props) {
                             <br />
                             <p>
                                 <span
-                                    style={{
-                                        fontWeight: "bold",
-                                        color: "gray",
-                                    }}
+                                    className="boldtext gray"
                                 >
                                     BILL TO
                                 </span>
@@ -123,7 +115,7 @@ function Invoice(props) {
                                   
                                         <>
                                             <span
-                                                style={{ fontWeight: "bold" }}
+                                               className="boldtext"
                                             >
                                                 {user}
                                             </span>
@@ -141,19 +133,13 @@ function Invoice(props) {
                                     <div>
                                         <p>
                                             <span
-                                                style={{
-                                                    fontWeight: "bold",
-                                                    color: "gray",
-                                                }}
+                                                className="boldtext gray"
                                             >
                                                 STATUS
                                             </span>
                                             <br />
                                             <span
-                                                style={{
-                                                    fontWeight: "bold",
-                                                    color: "red",
-                                                }}
+                                                className="boldtext red"
                                             >
                                                Paid
                                             </span>
@@ -161,16 +147,13 @@ function Invoice(props) {
                                         </p>
                                         <p>
                                             <span
-                                                style={{
-                                                    fontWeight: "bold",
-                                                    color: "gray",
-                                                }}
+                                                className="boldtext gray"
                                             >
                                                 DATE
                                             </span>
                                             <br />
                                             <span
-                                                style={{ fontWeight: "bold" }}
+                                                 className="boldtext"
                                             >
                                                 {date}
                                             </span>
@@ -178,16 +161,13 @@ function Invoice(props) {
                                         </p>
                                         <p>
                                             <span
-                                                style={{
-                                                    fontWeight: "bold",
-                                                    color: "gray",
-                                                }}
+                                                className="boldtext gray"
                                             >
                                                 AMOUNT
                                             </span>
                                             <br />
                                             <span
-                                                style={{ fontWeight: "bold" }}
+                                                 className="boldtext"
                                             >
                                                 &#8377; {price}
                                             </span>
@@ -216,7 +196,7 @@ function Invoice(props) {
                     </Table>
                 </div>
                 <div>
-                    <span style={{ fontWeight: "bold" }}>Payment Terms:</span>
+                    <span  className="boldtext">Payment Terms:</span>
                     <br />
                    Payment should be done within 30 days.
                    Thank You!!

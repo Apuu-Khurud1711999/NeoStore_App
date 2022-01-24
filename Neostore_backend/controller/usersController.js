@@ -6,26 +6,6 @@ const auth = require('../middleware/auth');
 const registermodel = require('../models/user.model');
 const Otp = require('../models/otpSchema');
 
-/* async function autenticateToken(req,res,next){
-    const authHeader=req.headers['authorization'];
-    const token=authHeader && authHeader.split(' ')[1];
-    console.log(token)
-    if(token==null){
-        await res.json({"err":1,"msg":"Token not match"})
-    }
-    else {
-        jwt.verify(token,jwtSecret,(err,data)=>{
-            if(err){
-                res.json({"err":1,"msg":"Token incorrect"})
-            }
-            else {
-                console.log("Match")
-                next();
-            }
-        })
-    }
-}  */ 
-
  async function login(req,res,next){
     let uname = req.body.uname;
     let email = req.body.email;
@@ -66,7 +46,7 @@ async function register(req,res,next){
 }
 
 async function socialuser(req,res,next){
-    let ins = new registermodel({ fname: req.body.fname,lname: req.body.lname,uname: req.body.uname, mobile: req.body.mobile, address:req.body.address ,/*  pic: req.body.pic , */email:req.body.email,password:req.body.password });
+    let ins = new registermodel({ fname: req.body.fname,lname: req.body.lname,uname: req.body.uname, mobile: req.body.mobile, address:"Sinhagad rd,Pune,Maharashtra,India" ,/*  pic: req.body.pic , */email:req.body.email,password:"SocialLogin123#" });
     await ins.save((err) => {
         if (err) {
             console.log(err)
@@ -78,54 +58,6 @@ async function socialuser(req,res,next){
     })
     
 } 
-
-/*  async function socialuser(req,res,next){
-    console.log(req.body)
-    let ins = new registermodel({ fname: req.body.fname,lname: req.body.lname,uname: req.body.uname, mobile: req.body.mobile,email:req.body.email,password:req.body.password })
-    let payload = {
-        uid: req.body.email,
-        uname:req.body.uname,
-        mobile:req.body.mobile,
-        email: req.body.email,
-        // id:data._id
-    }
-    const token = jwt.sign(payload, jwtSecret, { expiresIn: 360000 })
-    await ins.save((err) => {
-        if (err) {
-            res.json({message:`Hey ! ${req.body.uname} was logged in successfully` ,err:0,token:token})
-        }
-        else res.json( {
-            success: true,
-            status_code: 200,
-            message: `Hey ! ${req.body.uname} was logged in successfully`,
-            err:0,
-            token:token
-          })
-          
-    })
-}  */
- 
-/* async function socialuser(req,res,next){
-    console.log(req.body)
-    let ins = new registermodel({ fname: req.body.fname,lname: req.body.lname,uname: req.body.uname, mobile: req.body.mobile,email:req.body.email,password:req.body.password })
-    await ins.save((err) => {
-        if(err){
-            res.json({"err":1,"msg":"Email or password is not correct"})
-        }
-        else if(data==null)
-        {
-            res.json({"err":1,"msg":"Email or password is not correct"})
-        }
-
-        else{
-            let payload={
-            uid:uname
-        }
-        const token=jwt.sign(payload,jwtSecret,{expiresIn:360000})
-        res.json({"err":0,"msg":"Login Success","token":token})
-        }
-    })
-}  */
 
 const nodemailer = require ("nodemailer");
 

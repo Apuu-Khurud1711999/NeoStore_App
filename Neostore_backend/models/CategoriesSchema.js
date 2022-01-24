@@ -5,9 +5,6 @@ const CategoriesSchema=new mongoose.Schema({
         required:true,
         unique:true
     },
-   /*  category_image:{
-      type:String,
-    }, */
     created_at:{
       type:Date,
       default:Date.now

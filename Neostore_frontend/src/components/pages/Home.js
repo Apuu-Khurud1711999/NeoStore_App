@@ -11,10 +11,6 @@ const Home = () => {
       src="https://images-na.ssl-images-amazon.com/images/G/31/img19/Fashion/WA19/DressStore_Sobe/updates/Double-hero-pink._CB437954636_.jpg"
       alt="First slide"
     />
-    {/* <Carousel.Caption>
-      <h3>Welcome to Neo<span className="text-danger">STORE</span>!!</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </Carousel.Caption> */}
   </Carousel.Item>
   <Carousel.Item>
     <img

@@ -1,0 +1,17 @@
+
+.invoicewidth{
+    width: 700px;
+    border: 1px solid black;
+}
+.backgroundinvoice{
+    background-color: darkgrey;
+}
+.boldtext{
+    font-weight: bold;
+}
+.gray{
+    color:gray;
+}
+.red{
+    color:red;
+}

@@ -35,15 +35,6 @@ const ProductSchema=new mongoose.Schema({
     category_id:{
        type:mongoose.Schema.Types.ObjectId,
        ref:"categories"
-    },
-  /*   subImages:[
-        { type: String},
-        { type: String},
-        { type: String}
-    ], */
-    /* created_at:{
-      type:Date,
-      default:Date.now
-    } */
+    }
 })
 module.exports=mongoose.model('products',ProductSchema);

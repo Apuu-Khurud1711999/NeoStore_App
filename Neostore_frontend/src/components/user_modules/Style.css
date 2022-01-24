@@ -1,0 +1,32 @@
+.color{
+  color: red;
+}
+
+
+.login{
+    margin-top: 150px;     
+}
+.loginform{
+    margin-top: 20px;
+    height: 580px;
+}
+.formlogin{
+    width: 400px;
+    margin:auto
+}
+
+.register{
+    width : 625px;
+    height : 128px;
+    margin-top: 25px;
+    margin:auto
+}
+
+.form{
+    width: 600px;
+    margin: auto;
+}
+.formdata{
+    margin: auto;
+    width: auto;
+}
