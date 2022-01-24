@@ -10,7 +10,7 @@
     font-size: 18px;
   }
   
-  /* button {
+  button {
     border: none;
     outline: 0;
     display: inline-block;
@@ -19,14 +19,13 @@
     background-color: #000;
     text-align: center;
     cursor: pointer;
-    width: 100%;
+   /*  width: 100%; */
     font-size: 18px;
-  } */
+  } 
   
   a {
     text-decoration: none;
-    font-size: 22px;
-  /*   color: black; */
+    font-size: 20px;
   }
   
   button:hover, a:hover {

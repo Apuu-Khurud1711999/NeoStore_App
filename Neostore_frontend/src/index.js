@@ -25,7 +25,6 @@ function reducer(state = initialState, actions) {
         count: 0,
         cartItems: [],
       };
-
     default:
       return state;
   }
@@ -48,3 +47,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+ 

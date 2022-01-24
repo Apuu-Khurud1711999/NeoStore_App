@@ -4,6 +4,7 @@ import { Button, Card, Container, Form,Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { register,socialUser } from "../../config/MyService";
 import SocialButton from "./SocialButton";
+import './Style.css';
 
 const regForName = RegExp(/^[a-zA-Z]{2,100}$/);
 const regForUsername = RegExp(/^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+){6,100}$/);
@@ -39,18 +40,6 @@ const Register = () => {
 
     const handleSocialLogin = (user) => {
         console.log(user._profile)
-       /*  socialUser(user._profile)
-        .then(res=>{
-            console.log(res.data.msg)
-            if(res.data.err===0){
-               localStorage.setItem("_token",res.data.token);
-               localStorage.setItem("userdetails",state.email);
-               navigate("/dashboard");
-            }
-            if(res.data.err===1){
-                console.log(res.data)
-            }
-        }) */
         navigate("/");
         const URL = "http://localhost:5000/api/socialuser"
         axios.post(URL, {
@@ -58,10 +47,7 @@ const Register = () => {
             lname: user._profile.lastName,
             uname: user._profile.name,
             mobile: user._profile.id,
-            email: user._profile.email,
-            address: "Sinhagad-Rd,Pune,Maharashtra,India",
-           /*  pic: user._profile.profilePicURL, */
-            password: "SocialLogin123#",
+            email: user._profile.email
         })
             .catch(err => { console.log(err) })
       };
@@ -131,15 +117,18 @@ const Register = () => {
 
     const Register_user = (event) => {
         event.preventDefault();
+        if (data.email == "" || data.password == "" || data.fname == "" || data.lname == ""  || data.uname == ""  || data.mobile == "" || data.address == "" /* && data.pic !== "" */) {
+            alert("Please fill all the fields");
+        }
 
-        if (validate(state.errors)) {
+        else if(validate(state.errors)) {
             if (state.email !== "" && state.password !== "" && state.fname !== "" && state.lname !== ""  && state.uname !== ""  && state.mobile !== "" && state.address !== "" /* && state.pic !== "" */) {
                 alert("User Registered Successfully !!");
                 post_data();
                 navigate("/");
             }
             else {
-                alert("Failed to Register")
+                alert("Failed to Register");
             }
         }
         else {
@@ -178,12 +167,7 @@ const Register = () => {
             <Container>
             <Row>
             <Card
-             style={{
-                margin: "auto",
-                marginTop: "1rem",
-                width: "27rem",
-                height : "8rem"
-            }}
+            className="register"
             >
             <SocialButton
             provider="facebook"
@@ -207,15 +191,10 @@ const Register = () => {
           </Card>
           </Row>
                <Row>
-                <Card
-                    style={{
-                        margin: "auto",
-                        width: "auto",
-                    }}
-                >
+                <Card className="formdata">
                     <h2 className="text-center"><b>Register to Neo<span className="text-danger">STORE</span></b></h2>
                     <Form
-                        style={{ width: "400px", margin: "auto" }}
+                      className="form"
                         onSubmit={(e) => Register_user(e)}
                     >
                         <Form.Group>
@@ -228,7 +207,7 @@ const Register = () => {
                             />
                             <Form.Text>
                                 {state.errors.fname.length > 0 && (
-                                    <span style={{ color: "red" }}>
+                                    <span className="color">
                                         {state.errors.fname}
                                     </span>
                                 )}
@@ -244,7 +223,7 @@ const Register = () => {
                             />
                             <Form.Text>
                                 {state.errors.lname.length > 0 && (
-                                    <span style={{ color: "red" }}>
+                                    <span className="color">
                                         {state.errors.lname}
                                     </span>
                                 )}
@@ -260,7 +239,7 @@ const Register = () => {
                             />
                             <Form.Text>
                                 {state.errors.uname.length > 0 && (
-                                    <span style={{ color: "red" }}>
+                                    <span className="color">
                                         {state.errors.uname}
                                     </span>
                                 )}
@@ -276,7 +255,7 @@ const Register = () => {
                             />
                             <Form.Text>
                                 {state.errors.mobile.length > 0 && (
-                                    <span style={{ color: "red" }}>
+                                    <span className="color">
                                         {state.errors.mobile}
                                     </span>
                                 )}
@@ -292,22 +271,12 @@ const Register = () => {
                             />
                             <Form.Text>
                                 {state.errors.address.length > 0 && (
-                                    <span style={{ color: "red" }}>
+                                    <span className="color">
                                         {state.errors.address}
                                     </span>
                                 )}
                             </Form.Text>
                         </Form.Group>
-                        {/* <Form.Group>
-                           <Form.Label>Set Profile Picture</Form.Label>
-                          <Form.File
-                             onChange={onChangeUser}
-                             id="custom-file"
-                             type="image/png"
-                             label="Upload Profile Picture"
-                             custom
-                           /> 
-                           </Form.Group> */}
                         <Form.Group>
                             <Form.Label>Email</Form.Label>
                             <Form.Control
@@ -318,7 +287,7 @@ const Register = () => {
                             />
                             <Form.Text>
                                 {state.errors.email.length > 0 && (
-                                    <span style={{ color: "red" }}>
+                                    <span className="color">
                                         {state.errors.email}
                                     </span>
                                 )}
@@ -335,7 +304,7 @@ const Register = () => {
                             />
                             <Form.Text>
                                 {state.errors.password.length > 0 && (
-                                    <span style={{ color: "red" }}>
+                                    <span className="color">
                                         {state.errors.password}
                                     </span>
                                 )}
@@ -351,7 +320,7 @@ const Register = () => {
                             />
                             <Form.Text>
                                 {state.errors.cpassword.length > 0 && (
-                                    <span style={{ color: "red" }}>
+                                    <span className="color">
                                         {state.errors.cpassword}
                                     </span>
                                 )}

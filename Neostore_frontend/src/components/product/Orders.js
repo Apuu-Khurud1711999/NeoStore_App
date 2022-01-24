@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Navigate } from 'react-router-dom';
 import { getOrder } from '../../config/MyService';
 import { Card } from 'react-bootstrap';
 
@@ -29,6 +29,7 @@ const singleorder = (id)=> {
 
     return (
     <>
+       {localStorage.getItem("_token")? 
       <div className='container'>
       <div className=" container col-md-4">
       {orders.map((val, index) =>
@@ -50,7 +51,9 @@ const singleorder = (id)=> {
   <br />
   </div>
   </div>
-     
+      : <Navigate to ='/' />
+         
+    } 
     </>
     )
 }

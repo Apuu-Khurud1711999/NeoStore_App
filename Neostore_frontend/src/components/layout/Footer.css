@@ -13,21 +13,10 @@
     text-decoration: none;
   }
   
-  /* .form-control {
-    background: #212529;
-    border-color: #545454;
-  } 
-  
-  .form-control:focus {
-    background: #212529;
-  }  */
-  
   footer {
     background: #212529;
   }
-  
-  
-
-    body, html {
-      height: 100%;
-    }
+    
+  body, html {
+    height: 100%;
+  }

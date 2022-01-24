@@ -19,28 +19,8 @@ router.post('/socialuser',socialuser.socialuser);
 router.post('/email-send',emailSend.emailSend);
 router.post('/change-password',changePassword.changePassword);
 
-/* function autenticateToken(req,res,next){
-    const authHeader=req.headers['authorization'];
-    const token=authHeader && authHeader.split(' ')[1];
-    console.log(token)
-    if(token==null){
-        res.json({"err":1,"msg":"Token not match"})
-    }
-    else {
-        jwt.verify(token,jwtSecret,(err,data)=>{
-            if(err){
-                res.json({"err":1,"msg":"Token incorrect"})
-            }
-            else {
-                console.log("Match")
-                next();
-            }
-        })
-    }
-}  */
 const ordersmodel = require('../models/OrdersSchema');
 const productsmodel = require('../models/ProductSchema');
-//const userdata = require('../models/user.model');
 
 router.get("/products", (req, res) => {
     productsmodel.find({}, (err, data) => {
@@ -68,7 +48,7 @@ router.get("/fetchproduct", async (req, res) => {
     productsmodel.find()
     .populate(["category_id","color_id"])
     .then(product=>{
-        console.log(product);
+      /*   console.log(product); */
         res.send(product)
     })
 })
@@ -80,7 +60,7 @@ router.get("/fetchproduct", async (req, res) => {
       .findOne({ _id: id })
       .populate("color_id")
       .then((product) => {
-        console.log(product);
+       /*  console.log(product); */
   
         res.json({
           product: product,
@@ -95,7 +75,7 @@ router.get("/fetchproduct", async (req, res) => {
   
     ordersmodel.findOne({ _id: id })
       .then((order) => {
-        console.log(order);
+       /*  console.log(order); */
   
         res.json({
           order: order,

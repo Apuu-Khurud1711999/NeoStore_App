@@ -13,17 +13,9 @@ import {
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import ReactStars from "react-rating-stars-component";
 
-//import { connect } from "react-redux";
-//import axios from "axios";
-// import jwt_decode from 'jwt-decode';
-
-function ProductDetails(props) {
+function ProductDetails() {
   const [postdata, setPostdata] = useState([]);
-  const [images, setimages] = useState([]);
   const [mainimage, setmainimage] = useState();
-  const [rating, setrating] = useState();
-  const [uid, setUid] = useState("");
-  // let location = useLocation();
   const { state } = useLocation();
   const ratingChanged = (rating) => {
     console.log(rating);
@@ -33,16 +25,14 @@ function ProductDetails(props) {
     console.log(state.id);
     getsingleproduct(state.id)
       .then((res) => {
-        console.log(res.data);
-        setrating(res.data.product.product_rating);
+      /*   console.log(res.data); */
         setPostdata(res.data.product);
         setmainimage(res.data.product.product_image);
-        setimages(res.data.product_image);
 
       });
   }, []);
-  console.log(postdata);
-console.log(postdata.product_name)
+/* console.log(postdata);
+console.log(postdata.product_name) */
   return (
     <>
     
@@ -69,7 +59,6 @@ console.log(postdata.product_name)
                       },
                     }}
                   />
-                {/*  <img src={mainimage} className="img-fluid" alt="..." height="500px" width="500px" /> */}
                 </div>
                 <div className="col-md-6">
                   <div className="card1">
@@ -83,7 +72,6 @@ console.log(postdata.product_name)
                         className="card1"
                       />
                     </div>
-                  {/*  <p>{postdata.product_rating}</p><hr /> */}
                     <hr />
                     <br />
                     <h5>
@@ -99,47 +87,10 @@ console.log(postdata.product_name)
                     <h5>About this item:</h5>
                     <p>{postdata.product_descrip}</p>
                     <br />
-                    <div className="row">
-                      <div className="col-md-12">
-                        {" "}
-                        <a
-                          className="btn btn-danger"
-                          // onClick={() => addtoCart()}
-                        >
-                          Add to cart
-                        </a>
-                      </div>
-                      <br />
-                      <br />
-                      <div className="col-md-12">
-                        {" "}
-                        <a className="btn btn-secondary ">
-                          Rate product
-                        </a>
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <div className="container">
                  <div className="row">
-                   {/*  <div className="col-md-6">
-                      {images.map((item) => (
-                        <button
-                          className="btn img-fluid"
-                          width="100px"
-                          height="400px"
-                          onClick={() => setmainimage(item)}
-                        >
-                          {" "}
-                          <img
-                            src={item}
-                            width="100px"
-                            height="60px"
-                            className="img-fluid"
-                          />
-                        </button>
-                      ))}
-                    </div>  */}
                     <div className="col-md-6">
                       <div className="row">
                         <h4>Share</h4>

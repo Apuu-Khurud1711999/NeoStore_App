@@ -6,28 +6,33 @@ import axios from "axios";
 import {GoCreditCard} from "react-icons/go";
 import Alert from 'react-bootstrap/Alert';
 import { addOrders } from "../../config/MyService";
+import { useNavigate } from "react-router-dom";
 
 const Cart = (props) => {
   const cart = useSelector((state) => state.cartItems);
   console.log(cart);
-  // const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const newState = JSON.stringify(cart);
   console.log(newState)
   localStorage.setItem("LState", newState);
   const LState = localStorage.getItem("LState");
   console.log(LState);
-  const [card, setCard] = useState('')
-  const [flag, setFlag] = useState(1)
-  const [uid,setUid]=useState('')
+  const [card, setCard] = useState('');
+  const [flag, setFlag] = useState(1);
+  const [uid,setUid]=useState('');
+  
+  const navigate = useNavigate();
 
   const handler = (e) => {
     e.preventDefault();
     console.log(e.target.value)
     setCard(e.target.value)
-
   }
+
   const addorder = (e) => {
-    e.preventDefault();
+
+    if(localStorage.getItem("_token")){
+      e.preventDefault();
     console.log("http://localhost:5000/api/addorder");
     axios.post("http://localhost:5000/api/addorder",{
       cart: cart,
@@ -37,8 +42,16 @@ const Cart = (props) => {
       .then(res => {
         console.log(cart)
       })
-      alert("Order Successfully")
+      alert("Order Successfully");
+      props.remove();
+
       setFlag(0);
+    }
+    else{
+      alert("Login in first to order");
+      navigate("/");
+    }
+    
   }
   let total=0;
   for (var i = 0; i < cart.length; i++)
@@ -99,5 +112,4 @@ const mapDispatchTopProps = (dispatch) => {
     },
   };
 };
-
 export default connect(mapStateToProps, mapDispatchTopProps)(Cart);

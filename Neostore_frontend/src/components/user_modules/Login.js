@@ -5,14 +5,53 @@ import { Button, Container, Form, Card,Row,Col } from "react-bootstrap";
 import SocialButton from "./SocialButton";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
+import './Style.css';
+
+const regForUsername = RegExp(/^.{1,35}$/);
+const regForEmail = RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+const regForPassword = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])(?!.*\s).{8,25}$/);
 
 export default function Login() {
     const [state,setState]=useState({email:'',password:'',fname:'',lname:'',uname:'',mobile:'',address:''});
+    const [data, setData] = useState({
+        errors: {
+            uname:"",
+            email: "",
+            password: "",
+        },
+    });
 
     const handler=(event)=>{
         const {name,value}=event.target;
+        let errors = data.errors;
+
+        switch (name) {
+           
+            case "uname":
+                errors.uname = regForUsername.test(value)
+                    ? ""
+                    : "Username should be between 7-20 characters and can contain numbers. Can contain _ and . but should not start or end with them and should not appear next to each other and can be used only once";
+                break;
+
+            case "email":
+                errors.email = regForEmail.test(value)
+                    ? ""
+                    : "Enter Valid Email";
+                break;
+
+            case "password":
+                errors.password = regForPassword.test(value)
+                    ? ""
+                    : "Password must be between 8-25 characters and should contain atleast one lowercase letter, one uppercase letter and one special character";
+                break;
+
+            default:
+                alert("Fill proper details");
+        }
+        setData({  errors, [name]: value });
         setState({...state,[name]:value})
     }
+
     const navigate = useNavigate();
     
     const handleSocialLogin = (user) => {
@@ -24,9 +63,7 @@ export default function Login() {
             lname: user._profile.lastName,
             uname: user._profile.name,
             mobile: user._profile.id,
-            email: user._profile.email,
-            address: "Sinhagad-Rd,Pune,Maharashtra,India",
-            password: "SocialLogin123#",
+            email: user._profile.email
         })
             .catch(err => { console.log(err) })
       };
@@ -41,39 +78,42 @@ export default function Login() {
 
     const login_user=(event)=>{
         event.preventDefault();
+        if (state.email == "" || state.password == "" || state.uname == "" ) {
+            alert("Please fill all the fields");
+        }
+        else if(validate(data.errors)) {
         login(state)
         .then(res=>{
             console.log(res.data.msg)
-            if(res.data.err===0){
+            if(!res.data.err){
                 localStorage.setItem("_token",res.data.token);
                 localStorage.setItem("email",state.email)
-                localStorage.setItem("fname",res.data.payload.fname,)
-                localStorage.setItem("lname",res.data.payload.lname)
-                localStorage.setItem("uname",res.data.payload.uname)
-                localStorage.setItem("mobile",res.data.payload.mobile)
-                localStorage.setItem("address",res.data.payload.address)
                navigate("/dashboard");
             }
-            if(res.data.err===1){
+            else if(res.data.err){
                 console.log(res.data)
             }
         })
+        }
+        else {
+            alert("Please Enter Valid Details");
+        }
     }
+    
+    const validate = (errors) => {
+        let valid = true;
+        Object.values(errors).forEach(
+            (val) => val.length > 0 && (valid = false)
+        );
+        return valid;
+    };
     return (
         <>
          <div>
             <Container>
             <Row>
-           {/* <Button type='submit' color='primary' onClick={submit} variant="contained" style={btnstyle} fullWidth>Submit</Button> */}
             <Col>
-            <Card
-             style={{
-                margin: "auto",
-                marginTop: "10rem",
-                width: "auto",
-                height : "8rem"
-            }}
-            >
+            <Card className='login' >
             <SocialButton
             provider="facebook"
             appId="299015965434725"
@@ -98,20 +138,10 @@ export default function Login() {
           </Card>
           </Col>
           <Col>
-                <Card
-                    style={{
-                        margin: "auto",
-                        marginTop: "4rem",
-                        width: "auto",
-                        height : "38rem"
-                    }}
-                >
+                <Card className='loginform'>
                     <h2 className="text-center"><b>Login to Neo<span className="text-danger">STORE</span></b></h2>
                     <Form
-                        style={{
-                            width: "400px",
-                            margin: "auto",
-                        }}
+                        className='formlogin'
                         onSubmit={(e) => login_user(e)}
                     >
                         <Form.Group>
@@ -123,6 +153,13 @@ export default function Login() {
                                 onChange={handler}
                             >
                             </Form.Control>
+                            <Form.Text>
+                                {data.errors.uname.length > 0 && (
+                                    <span className="color">
+                                        {data.errors.uname}
+                                    </span>
+                                )}
+                            </Form.Text>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Email address</Form.Label>
@@ -133,6 +170,13 @@ export default function Login() {
                                 onChange={handler}
                             >
                             </Form.Control>
+                            <Form.Text>
+                                {data.errors.email.length > 0 && (
+                                    <span className="color">
+                                        {data.errors.email}
+                                    </span>
+                                )}
+                            </Form.Text>
                         </Form.Group>
 
                         <Form.Group>
@@ -144,6 +188,13 @@ export default function Login() {
                                 onChange={handler}
                             />
                         </Form.Group>
+                        <Form.Text>
+                                {data.errors.password.length > 0 && (
+                                    <span className="color">
+                                        {data.errors.password}
+                                    </span>
+                                )}
+                            </Form.Text>
                         <br />
                         <ReCAPTCHA
                             sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"

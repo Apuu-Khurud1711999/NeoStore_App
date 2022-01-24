@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getPosts } from "../../config/MyService";
 import { Dropdown, DropdownButton } from "react-bootstrap";
-import ProductDetails from "./ProductDetails";
+//import ProductDetails from "./ProductDetails";
 import { BsSearch, BsSortUpAlt, BsSortDown } from "react-icons/bs";
 import { FaSquareFull } from "react-icons/fa";
 // import MultiSelect from  'react-multiple-select-dropdown-lite';
@@ -18,73 +18,22 @@ function Filter(props) {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [showdata, setshowdata] = useState(1);
-  const [rating, setRating] = useState(1);
+  //const [rating, setRating] = useState(1); 
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = postdata.slice(indexOfFirstPost, indexOfLastPost);
+  //const currentPosts = postdata.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const cart = useSelector((state) => state.cartItems);
-  console.log(cart);
+  /* console.log(cart); */ 
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const navigate = useNavigate();
   
-  const ratingChanged = () => {
-    const sort_products = postdata;
-    sort_products.sort(function (a, b) {
-      var nameA = a.product_rating;
-      var nameB = b.product_rating;
-      if (nameA > nameB) {
-        return -1;
-      }
-      if (nameA < nameB) {
-        return 1;
-      }
-      return 0;
-    });
-    setPostdata(sort_products);
-  };
-
-  /* const addtoCart = (obj) => {
-    console.log(obj.name);
-    let item = {
-      name: obj.product_name,
-      price: obj.product_cost,
-      _id: obj._id,
-      quantity: 1,
-      image: obj.product_image,
-    };
-    if (localStorage.getItem("mycart") !== null) {
-      let arr = JSON.parse(localStorage.getItem("mycart"));
-      let idArrays = [];
-      arr.forEach((data) => {
-        idArrays.push(data._id);
-      });
-
-      if (idArrays.includes(obj._id)) {
-        // arr.forEach;
-        alert("Product Already Added");
-        // setItemadded(true);
-      } else {
-        arr.push(item);
-        localStorage.setItem("mycart", JSON.stringify(arr));
-        alert("Product Added to Cart");
-        window.location.reload(false)
-      }
-    } else {
-      let arr = [];
-      arr.push(item);
-      localStorage.setItem("mycart", JSON.stringify(arr));
-      alert("Product Added to Cart");
-      window.location.reload();
-    }
-  }; */
-
   const singleitem = (id)=> {
     console.log(id)
 ;
@@ -95,7 +44,7 @@ function Filter(props) {
 
 
   const filterCategory = (catItem) => {
-    console.log(data);
+   /*  console.log(data); */
     const result = data.filter((curdata) => {
       return curdata.category_id.category_name === catItem;
     });
@@ -111,10 +60,10 @@ function Filter(props) {
 
   const allproduct = () => {
     getPosts().then((res) => {
-      console.log(res.data);
+     /*  console.log(res.data); */
       setPostdata(res.data);
       setData(res.data);
-      console.log(postdata)
+      console.log(postdata) 
     });
   };
   const increase = () => {
@@ -327,9 +276,10 @@ function Filter(props) {
                             size={25}
                             activeColor="#ffd700"
                             className="center "
-                            edit={true}
+                            edit={false}
                             isHalf={true}
                             value={val.product_rating}
+                            
                           />
                            <a className="btn btn-warning" style={{"border-radius": "12px"}} onClick={() =>
                               props.cart(
@@ -339,13 +289,6 @@ function Filter(props) {
                                 val.product_cost
                               )
                             }><h6>{/* <MdOutlineAddShoppingCart/> &nbsp; */} Add to cart</h6></a>
-                         {/*  <a
-                            className="btn btncart text-white"
-                            style={{ "border-radius": "12px" }}
-                            onClick={() => addtoCart(val)}
-                          >
-                            <h5>Add to cart</h5>
-                          </a> */}
                         </div>
                       </div>
                     </div>
